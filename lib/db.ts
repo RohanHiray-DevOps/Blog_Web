@@ -1,4 +1,4 @@
-import { PrismaClient } from "../lib/generated/prisma";
+import { PrismaClient } from "./generated/prisma";
 import { PrismaNeon } from "@prisma/adapter-neon";
 
 const poolConfig = { connectionString: process.env.DATABASE_URL! };
