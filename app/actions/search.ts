@@ -68,6 +68,6 @@ export async function searchContent(query: string) {
 
     return { results };
   } catch (err) {
-    console.error({ err });
+    console.error("Error:", err);
   }
 }

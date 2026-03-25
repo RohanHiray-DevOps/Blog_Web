@@ -18,7 +18,7 @@ export const getCategories = async () => {
 
     return res;
   } catch (err) {
-    console.error({ err });
+    console.error("Error:", err);
     throw new Error("Something went wrong");
   }
 };
@@ -40,7 +40,7 @@ export const getCategoriesWithUser = async () => {
 
     return res;
   } catch (err) {
-    console.error({ err });
+    console.error("Error:", err);
     throw new Error("Something went wrong");
   }
 };
@@ -62,7 +62,7 @@ export const createCategory = async (name: string) => {
 
     return res;
   } catch (err) {
-    console.error({ err });
+    console.error("Error:", err);
     throw new Error("Something went wrong");
   }
 };
@@ -82,7 +82,7 @@ export const updateCategory = async (category: CategoryProps) => {
 
     return res;
   } catch (err) {
-    console.error({ err });
+    console.error("Error:", err);
     throw new Error("Something went wrong");
   }
 };
@@ -99,7 +99,7 @@ export const removeCategory = async (id: string) => {
 
     return res;
   } catch (err) {
-    console.error({ err });
+    console.error("Error:", err);
     throw new Error("Something went wrong");
   }
 };

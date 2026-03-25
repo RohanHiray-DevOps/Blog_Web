@@ -25,12 +25,18 @@ export default async function BlogPage({
         <div className="flex gap-6 text-sm">
           <div className="flex gap-6">
             <div className="relative h-8 w-8 rounded-full shadow-lg">
-              <Image
-                src={post.user.image!}
-                alt={post.user.name}
-                className="rounded-full shadow-lg"
-                fill
-              />
+              {post.user.image ? (
+                <Image
+                  src={post.user.image}
+                  alt={post.user.name}
+                  className="rounded-full shadow-lg object-cover"
+                  fill
+                />
+              ) : (
+                <div className="h-8 w-8 rounded-full bg-muted flex items-center justify-center text-xs font-medium">
+                  {post.user.name?.charAt(0).toUpperCase() ?? "U"}
+                </div>
+              )}
             </div>
             <div className="flex flex-col gap-1">
               <span className="text-sx font-medium">{post.user.name}</span>
@@ -47,14 +53,21 @@ export default async function BlogPage({
             </Link>
           </div>
         </div>
-        <div className="relative h-80 w-full">
-          <Image
-            src={post.imageUrl}
-            alt={post.title}
-            className="rounded-sm object-cover"
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          />
+
+        <div className="relative h-80 w-full bg-muted">
+          {post.imageUrl ? (
+            <Image
+              src={post.imageUrl}
+              alt={post.title}
+              className="rounded-sm object-cover"
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
+          ) : (
+            <div className="h-full w-full rounded-sm bg-muted flex items-center justify-center text-muted-foreground text-sm">
+              No image
+            </div>
+          )}
         </div>
 
         <RichTextViewer content={post.content} />

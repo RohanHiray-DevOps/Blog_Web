@@ -25,14 +25,20 @@ export default function PostCard({ post }: PostProps) {
 
   return (
     <Card className="w-full p-0 pb-4 border-0 shadow-md gap-1 relative">
-      <div className="relative h-60">
-        <Image
-          src={post.imageUrl}
-          alt={post.title}
-          fill
-          className="rounded-sm object-cover"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        />
+      <div className="relative h-60 bg-muted">
+        {post.imageUrl ? (
+          <Image
+            src={post.imageUrl}
+            alt={post.title}
+            fill
+            className="rounded-sm object-cover"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
+        ) : (
+          <div className="h-full w-full rounded-sm bg-muted flex items-center justify-center text-muted-foreground text-sm">
+            No image
+          </div>
+        )}
       </div>
       <CardHeader className="gap-0">
         <CardTitle className="font-semibold line-clamp-3 pt-2">
@@ -53,13 +59,19 @@ export default function PostCard({ post }: PostProps) {
         <div className="flex justify-between w-full gap-2">
           <div className="flex gap-1">
             <div className="relative h-8 w-8 rounded-full shadow-lg">
-              <Image
-                className="rounded-full shadow-lg"
-                src={post.user.image!}
-                alt={post.user.name}
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              />
+              {post.user.image ? (
+                <Image
+                  className="rounded-full shadow-lg object-cover"
+                  src={post.user.image}
+                  alt={post.user.name}
+                  fill
+                  sizes="32px"
+                />
+              ) : (
+                <div className="h-8 w-8 rounded-full bg-muted flex items-center justify-center text-xs font-medium">
+                  {post.user.name?.charAt(0).toUpperCase() ?? "U"}
+                </div>
+              )}
             </div>
 
             <div className="flex flex-col gap-1">

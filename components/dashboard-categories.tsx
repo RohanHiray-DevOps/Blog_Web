@@ -23,13 +23,19 @@ export default function DashboardCategories({ categories }: CategoryProps) {
             <p className="font-medium">{category.name} </p>
             <div className="flex items-center gap-1">
               <div className="relative h-8 w-8 rounded-full shadow-lg">
-                <Image
-                  className="rounded-full shadow-lg"
-                  src={category.user?.image ?? ""}
-                  alt={category.user?.name}
-                  fill
-                />
-              </div>
+  {category.user?.image ? (
+    <Image
+      className="rounded-full shadow-lg object-cover"
+      src={category.user.image}
+      alt={category.user?.name ?? "User"}
+      fill
+    />
+  ) : (
+    <div className="h-8 w-8 rounded-full bg-muted flex items-center justify-center text-xs font-medium">
+      {category.user?.name?.charAt(0).toUpperCase() ?? "U"}
+    </div>
+  )}
+</div>
               <p className="font-medium">{category.user?.name} </p>
             </div>
           </div>

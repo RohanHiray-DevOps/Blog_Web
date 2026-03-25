@@ -33,19 +33,29 @@ export const columns: ColumnDef<PostWithCategory>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "imageUrl",
-    header: "Image",
-    cell: ({ row }) => (
+  accessorKey: "imageUrl",
+  header: "Image",
+  cell: ({ row }) => {
+    const imageUrl = row.original.imageUrl;
+    
+    if (!imageUrl) return (
+      <div className="h-10 w-[60px] rounded-sm bg-muted flex items-center justify-center text-xs text-muted-foreground">
+        No image
+      </div>
+    );
+    
+    return (
       <div className="h-10 w-[60px] relative">
         <Image
-          src={row.original.imageUrl}
+          src={imageUrl}
           alt={row.original.title}
           fill
-          className="rounded-sm"
+          className="rounded-sm object-cover"
         />
       </div>
-    ),
+    );
   },
+},
   {
     accessorKey: "title",
     header: ({ column }) => {

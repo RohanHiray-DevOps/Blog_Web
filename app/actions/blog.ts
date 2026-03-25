@@ -1,4 +1,5 @@
 "use server";
+console.log("Prisma instance:", prisma);
 
 import { authSession } from "@/lib/auth-utils";
 import prisma from "@/lib/db";
@@ -17,7 +18,7 @@ export const getPosts = async (page: number) => {
     : null;
 
   try {
-    const [posts, totalCount] = await prisma.$transaction([
+    const [posts, totalCount] = await Promise.all([
       prisma.post.findMany({
         skip,
         take: PAGE_SIZE,
@@ -41,9 +42,9 @@ export const getPosts = async (page: number) => {
       currentPage: page,
     };
   } catch (err) {
-    console.error({ err });
-    throw new Error("Something went wrong");
-  }
+  console.error("BLOG ERROR:", err);  // remove the wrapping {}
+  throw new Error("Something went wrong");
+}
 };
 
 export const getBlogPostBySlug = async (slug: string) => {
@@ -58,7 +59,7 @@ export const getBlogPostBySlug = async (slug: string) => {
 
     return post;
   } catch (err) {
-    console.error({ err });
+    console.error("Error:", err);
     throw new Error("Something went wrong");
   }
 };
@@ -72,7 +73,7 @@ export const updatePostViews = async (id: string) => {
 
     return post;
   } catch (err) {
-    console.error({ err });
+    console.error("Error:", err);
     throw new Error("Something went wrong");
   }
 };
@@ -89,7 +90,7 @@ export const getPostsByCategory = async (categoryId: string, page: number) => {
     : null;
 
   try {
-    const [posts, totalCount] = await prisma.$transaction([
+    const [posts, totalCount] = await Promise.all([
       prisma.post.findMany({
         where: { categoryId },
         skip,
@@ -114,7 +115,7 @@ export const getPostsByCategory = async (categoryId: string, page: number) => {
       currentPage: page,
     };
   } catch (err) {
-    console.error({ err });
+    console.error("Error:", err);
     throw new Error("Something went wrong");
   }
 };
@@ -131,7 +132,7 @@ export const getPostsByTag = async (tag: string, page: number) => {
     : null;
 
   try {
-    const [posts, totalCount] = await prisma.$transaction([
+    const [posts, totalCount] = await Promise.all([
       prisma.post.findMany({
         where: { tags: { has: tag } },
         skip,
@@ -156,7 +157,7 @@ export const getPostsByTag = async (tag: string, page: number) => {
       currentPage: page,
     };
   } catch (err) {
-    console.error({ err });
+    console.error("Error:", err);
     throw new Error("Something went wrong");
   }
 };

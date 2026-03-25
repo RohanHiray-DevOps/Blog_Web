@@ -17,15 +17,17 @@ export const getUniquePost = async (id: string) => {
 
     return res;
   } catch (err) {
-    console.error({ err });
+    console.error("Error:", err);
     throw new Error("Something went wrong");
   }
 };
 
 export const createPost = async (params: PostFormValues) => {
+  const session = await authSession();
+   console.log("SESSION:", JSON.stringify(session?.user, null, 2));
+  console.log("PARAMS:", JSON.stringify(params, null, 2));
+ 
   try {
-    const session = await authSession();
-
     if (!session) {
       throw new Error("Unauthorized: User Id not found");
     }
@@ -43,7 +45,7 @@ export const createPost = async (params: PostFormValues) => {
 
     return res;
   } catch (err) {
-    console.error({ err });
+    console.error("Error:", err);
     throw new Error("Something went wrong");
   }
 };
@@ -70,7 +72,7 @@ export const updatePost = async (params: PostFormValues) => {
 
     return res;
   } catch (err) {
-    console.error({ err });
+    console.error("Error:", err);
     throw new Error("Something went wrong");
   }
 };
@@ -91,7 +93,7 @@ export const getAllPosts = async () => {
 
     return res;
   } catch (err) {
-    console.error({ err });
+    console.error("Error:", err);
     throw new Error("Something went wrong");
   }
 };
@@ -110,7 +112,7 @@ export const removePost = async (id: string) => {
 
     return res;
   } catch (err) {
-    console.error({ err });
+    console.error("Error:", err);
     throw new Error("Something went wrong");
   }
 };
@@ -131,7 +133,7 @@ export const getPostsByUser = async () => {
 
     return res;
   } catch (err) {
-    console.error({ err });
+    console.error("Error:", err);
     throw new Error("Something went wrong");
   }
 };
