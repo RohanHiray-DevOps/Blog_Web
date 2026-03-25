@@ -2,6 +2,7 @@
 
 import { LayoutDashboard, LogOut, Search } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import {
   NavigationMenu,
@@ -16,6 +17,7 @@ import { authClient } from "@/lib/auth-client";
 import { getNameInitials } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import { useState } from "react";
+import { toast } from "sonner";
 import GlobalSearchModal from "./global-search-modal";
 
 export function NavMenu({
@@ -27,6 +29,31 @@ export function NavMenu({
 }) {
   const isMobile = useIsMobile();
   const [isOpen, setIsOpen] = useState(false);
+  const [isSigningOut, setIsSigningOut] = useState(false);
+  const router = useRouter();
+
+  const handleSignOut = async () => {
+    try {
+      setIsSigningOut(true);
+      await authClient.signOut({
+        fetchOptions: {
+          onSuccess: () => {
+            router.push("/");
+            router.refresh();
+          },
+          onError: (ctx) => {
+            console.error("Signout error:", ctx.error);
+            toast.error("Failed to sign out. Please try again.");
+          },
+        },
+      });
+    } catch (error) {
+      console.error("Signout error:", error);
+      toast.error("Failed to sign out. Please try again.");
+    } finally {
+      setIsSigningOut(false);
+    }
+  };
 
   return (
     <NavigationMenu viewport={isMobile} className="mx-auto max-w-full my-5">
@@ -70,10 +97,10 @@ export function NavMenu({
                   <NavigationMenuLink asChild>
                     <div
                       className="flex-row items-center gap-2 cursor-pointer"
-                      onClick={() => authClient.signOut()}
+                      onClick={handleSignOut}
                     >
                       <LogOut />
-                      Signout
+                      {isSigningOut ? "Signing out..." : "Signout"}
                     </div>
                   </NavigationMenuLink>
                 </li>
