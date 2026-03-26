@@ -43,7 +43,7 @@ export function AppSidebar() {
           <SidebarGroupLabel>NextBlog</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {items.map((item) => (
+              {items.map((item:any) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <a href={item.url}>

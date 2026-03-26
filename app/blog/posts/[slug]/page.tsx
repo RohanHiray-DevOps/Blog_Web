@@ -73,7 +73,7 @@ export default async function BlogPage({
         <RichTextViewer content={post.content} />
 
         <div className="flex gap-2 py-6 flex-wrap">
-          {post.tags.map((tag) => (
+          {post.tags.map((tag:any) => (
             <Link href={`/blog/tag/${tag}`} key={tag}>
               <Badge variant="secondary">#{tag}</Badge>
             </Link>
