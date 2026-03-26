@@ -15,7 +15,7 @@ export default function DashboardCategories({ categories }: CategoryProps) {
         <CardTitle>Latest categories</CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col gap-6">
-        {categories.map((category:any) => (
+        {categories.map((category) => (
           <div
             key={category.id}
             className="p-4 rounded-lg gap-6 shadow-sm flex items-center"

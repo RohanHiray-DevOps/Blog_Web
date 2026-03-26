@@ -50,7 +50,7 @@ export async function searchContent(query: string) {
     ]);
 
     const results: SearchResult[] = [
-      ...posts.map((post:any) => ({
+      ...posts.map((post) => ({
         type: "post" as const,
         title: post.title,
         url: `/blog/posts/${post.slug}`,
@@ -58,7 +58,7 @@ export async function searchContent(query: string) {
         id: post.id,
       })),
 
-      ...categories.map((category:any) => ({
+      ...categories.map((category) => ({
         type: "category" as const,
         name: category.name,
         url: `/blog/category/${category.id}`,

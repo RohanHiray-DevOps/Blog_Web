@@ -12,7 +12,7 @@ export default function Loading() {
 
       <div className="flex flex-col gap-6 justify-center">
         <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-6 my-8">
-          {Array.from({ length: 8 }, (k, v) => v).map((item:any) => (
+          {Array.from({ length: 8 }, (k, v) => v).map((item) => (
             <SkeletonCard key={item} />
           ))}
         </div>

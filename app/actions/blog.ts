@@ -1,12 +1,19 @@
 "use server";
 
-
+import { PostFormValues } from "@/components/post-form";
 import { authSession } from "@/lib/auth-utils";
 import prisma from "@/lib/db";
-console.log("Prisma instance:", prisma);
+import { Post, PostStatus, User, Category } from "@/lib/generated/prisma/client";
+
+type PostWithCategory = Post & {
+  user: Pick<User, 'image' | 'name' | 'id' | 'savedPosts'>;
+  category: Category | null;
+  savedPosts: string[];
+};
+
 const PAGE_SIZE = 10;
 
-export const getPosts = async (page: number) => {
+export const getPosts = async (page: number): Promise<{ posts: PostWithCategory[], totalPages: number, currentPage: number }> => {
   const skip = (page - 1) * PAGE_SIZE;
   const session = await authSession();
 
@@ -34,7 +41,7 @@ export const getPosts = async (page: number) => {
     ]);
 
     return {
-      posts: posts.map((post:any) => ({
+      posts: posts.map((post) => ({
         ...post,
         savedPosts: currentUser?.savedPosts ?? [],
       })),
@@ -78,7 +85,7 @@ export const updatePostViews = async (id: string) => {
   }
 };
 
-export const getPostsByCategory = async (categoryId: string, page: number) => {
+export const getPostsByCategory = async (categoryId: string, page: number): Promise<{ posts: PostWithCategory[], totalPages: number, currentPage: number }> => {
   const skip = (page - 1) * PAGE_SIZE;
   const session = await authSession();
 
@@ -107,7 +114,7 @@ export const getPostsByCategory = async (categoryId: string, page: number) => {
     ]);
 
     return {
-      posts: posts.map((post:any) => ({
+      posts: posts.map((post) => ({
         ...post,
         savedPosts: currentUser?.savedPosts ?? [],
       })),
@@ -120,7 +127,7 @@ export const getPostsByCategory = async (categoryId: string, page: number) => {
   }
 };
 
-export const getPostsByTag = async (tag: string, page: number) => {
+export const getPostsByTag = async (tag: string, page: number): Promise<{ posts: PostWithCategory[], totalPages: number, currentPage: number }> => {
   const skip = (page - 1) * PAGE_SIZE;
   const session = await authSession();
 
@@ -149,7 +156,7 @@ export const getPostsByTag = async (tag: string, page: number) => {
     ]);
 
     return {
-      posts: posts.map((post:any) => ({
+      posts: posts.map((post) => ({
         ...post,
         savedPosts: currentUser?.savedPosts ?? [],
       })),
