@@ -50,7 +50,7 @@ export async function searchContent(query: string) {
     ]);
 
     const results: SearchResult[] = [
-      ...posts.map((post) => ({
+      ...posts.map((post:any) => ({
         type: "post" as const,
         title: post.title,
         url: `/blog/posts/${post.slug}`,

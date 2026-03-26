@@ -24,7 +24,7 @@ export default async function CategoryPage({
       <Header about={foundPost?.category?.name} />
       <div className="flex flex-col gap-6 justify-between h-full min-h-dvh">
         <div className="container mx-auto p-4 grid grid-cols-1 md:grid-cols-4 gap-6 my-8">
-          {posts.map((post) => (
+          {posts.map((post:any) => (
             <PostCard post={post} key={post.id} />
           ))}
         </div>

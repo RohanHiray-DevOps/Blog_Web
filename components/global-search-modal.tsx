@@ -118,7 +118,7 @@ export default function GlobalSearchModal({
                 Posts
               </div>
               <div className="flex flex-col gap-1">
-                {grouped.posts.map((post) => (
+                {grouped.posts.map((post:any) => (
                   <Link
                     href={post.url}
                     className="px-3 py-2 rounded-sm"
