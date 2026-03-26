@@ -8,7 +8,11 @@ import { Post, PostStatus, User, Category } from "@/lib/generated/prisma/client"
 type PostWithCategory = Post & {
   user: Pick<User, 'image' | 'name' | 'id' | 'savedPosts'>;
   category: Category | null;
-  savedPosts: string[];
+};
+
+type PostFromQuery = Post & {
+  user: Pick<User, 'image' | 'name' | 'id' | 'savedPosts'>;
+  category: Category | null;
 };
 
 const PAGE_SIZE = 10;
@@ -41,7 +45,7 @@ export const getPosts = async (page: number): Promise<{ posts: PostWithCategory[
     ]);
 
     return {
-      posts: posts.map((post) => ({
+      posts: posts.map((post: PostFromQuery) => ({
         ...post,
         savedPosts: currentUser?.savedPosts ?? [],
       })),
