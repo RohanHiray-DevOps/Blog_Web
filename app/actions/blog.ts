@@ -1,9 +1,9 @@
 "use server";
-console.log("Prisma instance:", prisma);
+
 
 import { authSession } from "@/lib/auth-utils";
 import prisma from "@/lib/db";
-
+console.log("Prisma instance:", prisma);
 const PAGE_SIZE = 10;
 
 export const getPosts = async (page: number) => {
@@ -42,8 +42,8 @@ export const getPosts = async (page: number) => {
       currentPage: page,
     };
   } catch (err) {
-  console.error("BLOG ERROR:", err);  // remove the wrapping {}
-  throw new Error("Something went wrong");
+  console.error("BLOG ERROR:", err);
+  throw err;
 }
 };
 
