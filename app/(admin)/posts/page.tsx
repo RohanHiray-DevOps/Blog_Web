@@ -12,6 +12,8 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { columns } from "./clients/columns";
 
+
+
 export default async function PostsPage() {
   const data = await getAllPosts();
 
