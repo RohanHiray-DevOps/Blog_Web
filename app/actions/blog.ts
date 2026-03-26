@@ -160,7 +160,7 @@ export const getPostsByTag = async (tag: string, page: number): Promise<{ posts:
     ]);
 
     return {
-      posts: posts.map((post) => ({
+      posts: posts.map((post: PostFromQuery & { tags: string[] }) => ({
         ...post,
         savedPosts: currentUser?.savedPosts ?? [],
       })),
