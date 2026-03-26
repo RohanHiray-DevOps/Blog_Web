@@ -20,6 +20,9 @@ importers:
       '@prisma/client':
         specifier: ^7.5.0
         version: 7.5.0(prisma@7.5.0(@types/react@19.2.14)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(typescript@5.9.3))(typescript@5.9.3)
+      '@prisma/config':
+        specifier: ^7.5.0
+        version: 7.5.0
       '@radix-ui/react-accordion':
         specifier: ^1.2.12
         version: 1.2.12(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -201,6 +204,9 @@ importers:
       '@types/react-dom':
         specifier: ^19
         version: 19.2.3(@types/react@19.2.14)
+      baseline-browser-mapping:
+        specifier: ^2.10.10
+        version: 2.10.10
       eslint:
         specifier: ^9
         version: 9.39.4(jiti@2.6.1)
