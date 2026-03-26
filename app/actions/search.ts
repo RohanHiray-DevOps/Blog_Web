@@ -3,6 +3,18 @@
 import prisma from "@/lib/db";
 import { PostStatus } from "@/lib/generated/prisma/client";
 
+type PostSelect = {
+  id: string;
+  title: string;
+  imageUrl: string;
+  slug: string;
+};
+
+type CategorySelect = {
+  id: string;
+  name: string;
+};
+
 type SearchResult =
   | {
       type: "post";
@@ -50,7 +62,7 @@ export async function searchContent(query: string) {
     ]);
 
     const results: SearchResult[] = [
-      ...posts.map((post) => ({
+      ...posts.map((post: PostSelect) => ({
         type: "post" as const,
         title: post.title,
         url: `/blog/posts/${post.slug}`,
@@ -58,7 +70,7 @@ export async function searchContent(query: string) {
         id: post.id,
       })),
 
-      ...categories.map((category) => ({
+      ...categories.map((category: CategorySelect) => ({
         type: "category" as const,
         name: category.name,
         url: `/blog/category/${category.id}`,
