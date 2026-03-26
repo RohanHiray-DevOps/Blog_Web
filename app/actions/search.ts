@@ -58,7 +58,7 @@ export async function searchContent(query: string) {
         id: post.id,
       })),
 
-      ...categories.map((category) => ({
+      ...categories.map((category:any) => ({
         type: "category" as const,
         name: category.name,
         url: `/blog/category/${category.id}`,
