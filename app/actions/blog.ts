@@ -107,7 +107,7 @@ export const getPostsByCategory = async (categoryId: string, page: number) => {
     ]);
 
     return {
-      posts: posts.map((post:any) => ({
+      posts: posts.map((post) => ({
         ...post,
         savedPosts: currentUser?.savedPosts ?? [],
       })),
