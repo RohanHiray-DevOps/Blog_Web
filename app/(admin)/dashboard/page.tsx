@@ -14,7 +14,7 @@ export default async function DashboardPage() {
   const categories = await getCategoriesWithUser();
 
   const totalViews = posts.reduce(
-  (acc: number, item) => acc + (item.views ?? 0),
+  (acc: number, item:any) => acc + (item.views ?? 0),
   0
 );
 
